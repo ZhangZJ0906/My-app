@@ -1,4 +1,127 @@
-<h1>testttt</h1>
+<style>
+  table,
+  th {
+    border: 1px solid black;
+
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  /* Flex 排版設定 */
+  .container {
+    display: flex;
+    gap: 40px;
+    /* 左右兩欄的間距 */
+    max-width: 1000px;
+    margin: 0 auto;
+    /* 網頁居中 */
+    padding: 20px;
+  }
+
+  .left-column,
+  .right-column {
+    flex: 1;
+    /* 讓左右兩邊平分寬度 */
+  }
+</style>
+
+<h1>HTML練習</h1>
+
+<br>
+<hr>
+<textarea name="tex" id="tex">我是文字輸入框(可以拉大)</textarea>
+<ul>
+  <li><input type="text"></li>
+  <li><input type="checkbox"></li>
+</ul>
+<ol>
+  <li><input type="file" name="" id=""></li>
+  <li><input type="radio" name="te" id="te"></li>
+</ol>
+
+<button>我是按鈕Button</button>
+<br>
+<hr>
+<img src="https://picsum.photos/1500/200" alt="">
+<br>
+<hr>
+
+<table>
+  <thead>
+    <th>姓名</th>
+    <th>數學</th>
+    <th>英文</th>
+  </thead>
+  <tbody>
+    <tr>
+      <th>小明</th>
+      <th>92</th>
+      <th>70</th>
+    </tr>
+    <tr>
+      <th>大明</th>
+      <th>95</th>
+      <th>78</th>
+    </tr>
+  </tbody>
+
+</table>
+
+
+
+<div class="container">
+  <div class="left-column">
+    <h1>王大明</h1>
+    <p>嗨，我是一個正在學習HTML的新手</p>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCXf8Upd6mHTvMGscOxbwpNKuOj6M5v8ATLQ&s" alt="">
+    <br>
+    <h1>關於我</h1>
+    <p>我喜歡寫程式、看漫畫，還有玩電腦遊戲。</p>
+    <h1>我的興趣</h1>
+    <ul>
+      <li>學習網頁設計</li>
+      <li>打籃球</li>
+      <li>旅行</li>
+    </ul>
+    <br>
+  </div>
+  <div class="right-column">
+    <h1>聯絡我</h1>
+    <p>Email:<a href="mailto:test@example.com">test&#64;example.com</a></p>
+    <p>喜歡的網站: <a href="http://google.com" target="_blank">Google</a></p>
+    <br>
+    <h1>我的作品</h1>
+    <table>
+      <thead>
+        <th>專案名稱</th>
+        <th>簡介</th>
+      </thead>
+      <tbody>
+        <tr>
+          <th>個人名片網頁</th>
+          <th>用純HTML做的第一個作品!</th>
+        </tr>
+        <tr>
+          <th>帶完成的專案</th>
+          <th>持續增加中...</th>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <h1>留言給我</h1>
+    <form action="">
+      <label for="name">姓名:</label>
+      <input type="text" name="name" id="name">
+      <br>
+      <br>
+      <label for="context">留言:</label>
+      <textarea name="context" id="context"></textarea>
+      <br>
+      <button type="submit">送出</button>
+    </form>
+  </div>
+</div>
+
 <router-outlet />
-
-
