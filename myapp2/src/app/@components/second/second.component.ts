@@ -14,13 +14,15 @@ export class SecondComponent {
   editlevel!: any;
 
   lossLevel() {
-    if (this.level < 2) {
+    if (this.level <= 1) {
       this.level = 1;
-      alert("我去不能小於1")
+      alert('我去不能小於1');
+      return
+    } else {
+      this.level -= 1;
+      this.attack -= 3;
+      this.defeat -= 2;
     }
-    this.level -= 1;
-    this.attack -= 3;
-    this.defeat -= 2;
   }
   upLevel() {
     this.level += 1;
@@ -28,7 +30,7 @@ export class SecondComponent {
     this.defeat += 2;
   }
   edit(newLevel: number) {
-    this.editlevel='';
+    this.editlevel = '';
     let levels = newLevel - this.level;
     this.level = newLevel;
     this.attack += levels * 3;
