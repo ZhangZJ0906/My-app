@@ -1,1 +1,20 @@
-<p class="bg-dark text-white">second works!</p>
+<!-- 
+
+<input type="number" [(ngModel)]="editlevel">
+<br>
+<button (click)="edit(editlevel)">修改等級</button> -->
+<div class="w-25 h-25 border-1">
+  <div class=" d-flex justify-content-end">
+    <button class="" (click)="reset()">重製</button>
+  </div>
+  <h2 class="mb-5 text-danger text-center">角色等級升級器</h2>
+  <h3 class="mx-3">等級:{{level}}</h3>
+  <div class="d-flex justify-content-between ">
+    <button (click)="upLevel() " class="rounded-3">升等</button>
+    <button (click)="lossLevel()" class="rounded-3">降等</button>
+  </div>
+<h4 class="mt-5">攻擊力:{{attack}}</h4>
+<h4 class="mt-5">防禦力:{{defeat}}</h4>
+<p class="text-danger"> 註解:角色初始等級為1，初始攻擊/防禦為10，</p>
+
+</div>
