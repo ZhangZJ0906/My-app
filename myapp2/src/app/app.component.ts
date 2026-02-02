@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLinkWithHref, RouterLink, RouterLinkActive } from '@angular/router';
 import { FirstComponent } from './@components/first/first.component';
 import { SecondComponent } from './@components/second/second.component';
 enum apiStatus {
@@ -9,7 +9,7 @@ enum apiStatus {
 }
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,SecondComponent],
+  imports: [RouterOutlet, RouterLinkWithHref, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

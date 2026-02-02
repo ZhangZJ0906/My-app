@@ -1,5 +1,7 @@
+import { ExampleService } from './../../@services/example.service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-second',
@@ -8,6 +10,19 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './second.component.scss',
 })
 export class SecondComponent {
+  constructor(
+    private router: Router,
+    private activateRoute: ActivatedRoute,
+    private exampleService: ExampleService,
+  ) {}
+  getData!:string;
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.getData=this.exampleService.name;
+    console.log(this.activateRoute.snapshot.paramMap.get('id'));
+  }
+
   level: number = 1; // 等級
   attack: number = 10; // 攻擊
   defeat: number = 10; //防禦
@@ -33,7 +48,8 @@ export class SecondComponent {
   }
   //=========修改等級================
   edit(newLevel: number) {
-    if (newLevel == null || newLevel<1) { //防呆一開使沒想到
+    if (newLevel == null || newLevel < 1) {
+      //防呆一開使沒想到
       return;
     }
     this.editlevel = '';
