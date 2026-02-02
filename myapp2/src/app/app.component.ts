@@ -9,7 +9,7 @@ enum apiStatus {
 }
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,FirstComponent,SecondComponent],
+  imports: [RouterOutlet,SecondComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
