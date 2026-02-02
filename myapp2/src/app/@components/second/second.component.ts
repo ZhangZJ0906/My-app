@@ -33,6 +33,9 @@ export class SecondComponent {
   }
   //=========修改等級================
   edit(newLevel: number) {
+    if (newLevel == null || newLevel<1) { //防呆一開使沒想到
+      return;
+    }
     this.editlevel = '';
     let levels = newLevel - this.level;
     this.level = newLevel;
