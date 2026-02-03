@@ -1,1 +1,11 @@
 <p>father works!</p>
+
+<p>user name {{getData.name}}</p>
+<p>user email {{getData.email}}</p>
+<p>user address {{getData.address}}</p>
+
+
+
+<app-child (origindata)="showData($event)"></app-child>
+
+<p>{{getData}}</p>

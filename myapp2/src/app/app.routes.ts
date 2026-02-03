@@ -4,17 +4,21 @@ import { SecondComponent } from './@components/second/second.component';
 import { AppComponent } from './app.component';
 import { ThirdComponent } from './@components/third/third.component';
 import { ChildComponent } from './@components/child/child.component';
+import { FatherComponent } from './@components/father/father.component';
 
 export const routes: Routes = [
   {
     path: 'first',
     component: FirstComponent,
-    children: [
-      {
-        path: 'child',
-        component: ChildComponent,
-      },
-    ],
+
+  },
+  {
+    path:'father',
+    component:FatherComponent
+  },
+  {
+    path:'child',
+    component:ChildComponent
   },
   {
     path: 'second',
