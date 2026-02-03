@@ -1,10 +1,10 @@
-<p routerLink="/first" class="text-danger">firstComponents</p>
-<p routerLink="/second">secondComponents</p>
-
-
-<button (click)="gotoindex()">go to third page</button>
-<button (click)="gotofirst()">go to first  page</button>
-<button (click)="gotosecond()">go to second page</button>
-
-
-<button (click)="gotosecond()">go to second</button>
+<!-- <form action=""> -->
+  <label for="account">帳號: </label>
+  <input type="text" id="account" [(ngModel)]="account">
+  <br>
+  <label for="password">密碼: </label>
+  <input type="password" id="password" [(ngModel)]="password">
+  <br>
+  <br>
+  <button (click)="sendData()">send</button>
+<!-- </form> -->

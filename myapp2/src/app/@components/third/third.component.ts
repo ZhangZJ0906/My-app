@@ -8,10 +8,11 @@ import {
   ActivatedRoute,
 } from '@angular/router';
 import { ChildComponent } from '../child/child.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-third',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, FormsModule],
   templateUrl: './third.component.html',
   styleUrl: './third.component.scss',
 })
@@ -21,21 +22,14 @@ export class ThirdComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {}
-  firstData: string= 'test';
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    console.log(this.activatedRoute.snapshot.queryParamMap.get('id'));
-  }
 
-  gotoindex() {
-    this.router.navigate(['/']);
-  }
-  gotofirst() {
-    this.router.navigate(['/first']);
-  }
-  gotosecond() {
-    this.exampleService.name = this.firstData;
+  account!: string; //帳號
+  password!: string; //密碼
+  sendData() {
+    this.exampleService.globalData = {
+      account: this.account,
+      password: this.password,
+    };
     this.router.navigate(['/second']);
   }
 }
