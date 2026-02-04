@@ -7,6 +7,7 @@ import { ChildComponent } from './@components/child/child.component';
 import { FatherComponent } from './@components/father/father.component';
 import { ArrayyyComponent } from './@components/arrayyy/arrayyy.component';
 import { IfdemoComponent } from './@components/ifdemo/ifdemo.component';
+import { ApidemoComponent } from './@components/apidemo/apidemo.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
   {
     path: 'father',
     component: FatherComponent,
+  },
+  {
+    path: 'apidemo',
+    component: ApidemoComponent,
   },
   {
     path: 'if',
