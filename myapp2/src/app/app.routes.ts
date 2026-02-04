@@ -5,20 +5,29 @@ import { AppComponent } from './app.component';
 import { ThirdComponent } from './@components/third/third.component';
 import { ChildComponent } from './@components/child/child.component';
 import { FatherComponent } from './@components/father/father.component';
+import { ArrayyyComponent } from './@components/arrayyy/arrayyy.component';
+import { IfdemoComponent } from './@components/ifdemo/ifdemo.component';
 
 export const routes: Routes = [
   {
     path: 'first',
     component: FirstComponent,
-
   },
   {
-    path:'father',
-    component:FatherComponent
+    path: 'father',
+    component: FatherComponent,
   },
   {
-    path:'child',
-    component:ChildComponent
+    path: 'if',
+    component: IfdemoComponent,
+  },
+  {
+    path: 'array',
+    component: ArrayyyComponent,
+  },
+  {
+    path: 'child',
+    component: ChildComponent,
   },
   {
     path: 'second',

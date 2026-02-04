@@ -1,0 +1,15 @@
+<p>arrayyy works!</p>
+
+
+@for(data of userArr ;track $index){
+  <div class="border border-primary mt-5 w-25">
+      <p class="text-center">{{data.userName}} 等級 {{data.lev}}</p>
+      <p>擁有道具</p>
+      @for(pro of data.props;track $index){
+      <ul>
+        <li>{{pro.propsName}} 數量: {{pro.amount}}</li>
+      </ul>
+      }
+  </div>
+
+}
