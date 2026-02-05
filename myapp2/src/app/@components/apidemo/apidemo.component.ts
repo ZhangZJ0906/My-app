@@ -25,6 +25,7 @@ export class ApidemoComponent {
   currentWeather!: string;
   currentWeatherDesc!: string;
   currentTime!: string;
+  currentWeathercode!:number;
   getNext3Days() {
     const days = [];
     const now = new Date();
@@ -72,6 +73,7 @@ export class ApidemoComponent {
       if (now >= start && now < end) {
         this.currentWeather = this.threeHourData[i].weather;
         this.currentWeatherDesc = this.threeHourData[i].weatherDes;
+        this.currentWeathercode=this.threeHourData[i].weatherCode;
         break;
       }
     }
@@ -117,6 +119,7 @@ export class ApidemoComponent {
         weather: data.WeatherElement[8].Time[i].ElementValue[0].Weather,
         weatherDes:
           data.WeatherElement[9].Time[i].ElementValue[0].WeatherDescription,
+        weatherCode: data.WeatherElement[9].Time[i].ElementValue[0].WeatherCode,
       };
       threetest.push(item);
     }
@@ -143,6 +146,7 @@ export class ApidemoComponent {
         this.areaChange(this.choseArea); //直接顯示
         this.updateCurrentWeather();
         this.filterByDay(this.selectedDay);
+        console.log(this.location);
 
         // console.log(this.oneHourData);
         // console.log(this.threeHourData);

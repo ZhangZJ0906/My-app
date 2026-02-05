@@ -1,13 +1,18 @@
 <!-- 首都 -->
-<p>{{city}}</p>
+<p>{{ city }}</p>
 <!-- 選地區 -->
-<select name="area" id="cityArea" [(ngModel)]="choseArea" (ngModelChange)="areaChange(choseArea)">
+<select
+  name="area"
+  id="cityArea"
+  [(ngModel)]="choseArea"
+  (ngModelChange)="areaChange(choseArea)"
+>
   @for (item of area; track $index) {
-  <option [value]="item">{{item}}</option>
+    <option [value]="item">{{ item }}</option>
   }
 </select>
 <!-- 資料 -->
-<p>{{choseArea}}</p>
+<p>{{ choseArea }}</p>
 <div class="card p-3">
   <h5>目前天氣</h5>
   <div>時間：{{ currentTime }}</div>
@@ -15,19 +20,32 @@
   <div>體感：{{ currentAppTemp }} °C</div>
   <div>天氣：{{ currentWeather }}</div>
   <div>{{ currentWeatherDesc }}</div>
+  <div class="">
+    @switch (currentWeather) {
+      @case ("晴") {
+        <img src="image/clear-day.svg" alt="晴"  class="w-25"/>
+        break;
+      }
+      @case ("多雲") {
+        <img src="image/partly-cloudy-day.svg" alt="晴" class="w-25" />
+      }
+      @case ("短暫雨") {
+        <img src="image/partly-cloudy-day-drizzle.svg" alt="晴"  class="w-25"/>
+      }
+    }
+  </div>
 </div>
 <select [(ngModel)]="selectedDay" (change)="filterByDay(selectedDay)">
   @for (item of dayOptions; track $index) {
-  <option [value]="item">
-    {{ item }}
-  </option>
+    <option [value]="item">
+      {{ item }}
+    </option>
   }
 </select>
 
 @for (data of filteredData; track data.time) {
-<div>
-  {{ data.time }}
-  溫度：{{ data.temperature }}°C
-  體感：{{ data.apparentTemperature }}°C
-</div>
+  <div>
+    {{ data.time }}
+    溫度：{{ data.temperature }}°C 體感：{{ data.apparentTemperature }}°C
+  </div>
 }
