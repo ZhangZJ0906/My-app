@@ -7,5 +7,27 @@
   }
 </select>
 <!-- 資料 -->
-<!-- <p>{{data}}</p> -->
-<!-- <p>{{choseArea}}</p> -->
+<p>{{choseArea}}</p>
+<div class="card p-3">
+  <h5>目前天氣</h5>
+  <div>時間：{{ currentTime }}</div>
+  <div>溫度：{{ currentTemp }} °C</div>
+  <div>體感：{{ currentAppTemp }} °C</div>
+  <div>天氣：{{ currentWeather }}</div>
+  <div>{{ currentWeatherDesc }}</div>
+</div>
+<select [(ngModel)]="selectedDay" (change)="filterByDay(selectedDay)">
+  @for (item of dayOptions; track $index) {
+  <option [value]="item">
+    {{ item }}
+  </option>
+  }
+</select>
+
+@for (data of filteredData; track data.time) {
+<div>
+  {{ data.time }}
+  溫度：{{ data.temperature }}°C
+  體感：{{ data.apparentTemperature }}°C
+</div>
+}
