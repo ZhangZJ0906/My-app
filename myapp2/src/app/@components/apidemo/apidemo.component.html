@@ -1,16 +1,11 @@
+<!-- 首都 -->
 <p>{{city}}</p>
-@for (item of area; track $index) {
-<!-- 區域 -->
-<p>{{item.LocationName}}</p>
-<!-- 溫度 -->
-@for (weheather of item.WeatherElement[0].Time; track $index) {
-<p>{{weheather.DataTime }}</p>
-<p class="text-primary">溫度 {{weheather.ElementValue[0].Temperature}}</p>
-}
-<!-- 露點溫度 -->
-@for (DewPoint of item.WeatherElement[1].Time; track $index) {
-<!-- <p>{{DewPoint.DataTime }}</p> -->
-<p class="text-danger">露點溫度 {{DewPoint.ElementValue[0].DewPoint}}</p>
-}
-
-}
+<!-- 選地區 -->
+<select name="area" id="cityArea" [(ngModel)]="choseArea" (ngModelChange)="areaChange(choseArea)">
+  @for (item of area; track $index) {
+  <option [value]="item">{{item}}</option>
+  }
+</select>
+<!-- 資料 -->
+<!-- <p>{{data}}</p> -->
+<!-- <p>{{choseArea}}</p> -->
