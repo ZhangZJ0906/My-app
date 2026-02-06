@@ -21,11 +21,13 @@ export class ApidemoComponent {
   selectedDay!: string; // 目前選擇
   filteredData!: any[]; // 顯示資料
   currentTemp!: string;
-  currentAppTemp!: string;
+  currentAppTemp!: number;
   currentWeather!: string;
   currentWeatherDesc!: string;
   currentTime!: string;
-  currentWeathercode!:number;
+  currentWeathercode!: string;
+
+// 抓後三天
   getNext3Days() {
     const days = [];
     const now = new Date();
@@ -34,49 +36,82 @@ export class ApidemoComponent {
       const d = new Date(now);
       d.setDate(now.getDate() + i);
 
-      const dateStr = d.toISOString().slice(0, 10); // 2026-02-05
+      const dateStr = d.toISOString().slice(0, 10); 
       days.push(dateStr);
     }
 
     return days;
   }
-
+// 未來資料
   filterByDay(day: string) {
-    this.filteredData = this.oneHourData.filter((item: any) =>
+    // 1️⃣ 逐小時
+    const oneHour = this.oneHourData.filter((item: any) =>
       item.time.startsWith(day),
     );
+
+    // 2️⃣ 三小時區間
+    const threeHour = this.threeHourData.filter((item: any) =>
+      item.startTime.startsWith(day),
+    );
+
+    // 3️⃣ 合併資料
+    this.filteredData = oneHour.map((hour: any) => {
+      const three = threeHour.find((item: any) => {
+        const start = new Date(item.startTime).getTime();
+        const end = new Date(item.endTime).getTime();
+        const time = new Date(hour.time).getTime();
+
+        return time >= start && time < end;
+      });
+
+      return {
+        ...hour,
+        weather: three?.weather ?? '',
+        weatherDes: three?.weatherDes ?? '',
+        weatherCode: three?.weatherCode ?? '01',
+      };
+    });
   }
-
+// 顯示現在資料
   updateCurrentWeather() {
-    if (!this.oneHourData || !this.threeHourData) return;
+    if (!this.oneHourData?.length || !this.threeHourData?.length) return;
 
-    const now = new Date();
+    const now = Date.now();
 
-    // ===== 逐小時資料（溫度/體感）
-    for (let i = 0; i < this.oneHourData.length - 1; i++) {
-      const start = new Date(this.oneHourData[i].time);
-      const end = new Date(this.oneHourData[i + 1].time);
+    // =========================
+    // 1小時溫度（抓最近一筆 <= now）
+    // =========================
+    let hour = this.oneHourData
+      .slice() // 不污染原陣列
+      .reverse() // 從最新往前找
+      .find((item: any) => new Date(item.time).getTime() <= now);
 
-      if (now >= start && now < end) {
-        this.currentTemp = this.oneHourData[i].temperature;
-        this.currentAppTemp = this.oneHourData[i].apparentTemperature;
-        this.currentTime = this.oneHourData[i].time;
-        break;
-      }
+    // ⭐ 如果現在比第一筆還早（像你 11:39 < 12:00）
+    if (!hour) {
+      hour = this.oneHourData[0];
     }
 
-    // ===== 3小時區間資料（天氣）
-    for (let i = 0; i < this.threeHourData.length; i++) {
-      const start = new Date(this.threeHourData[i].startTime);
-      const end = new Date(this.threeHourData[i].endTime);
+    this.currentTemp = hour.temperature;
+    this.currentAppTemp = hour.apparentTemperature;
+    this.currentTime = hour.time;
 
-      if (now >= start && now < end) {
-        this.currentWeather = this.threeHourData[i].weather;
-        this.currentWeatherDesc = this.threeHourData[i].weatherDes;
-        this.currentWeathercode=this.threeHourData[i].weatherCode;
-        break;
-      }
+    // =========================
+    // 3小時天氣（區間比對）
+    // =========================
+    let three = this.threeHourData.find((item: any) => {
+      const start = new Date(item.startTime).getTime();
+      const end = new Date(item.endTime).getTime();
+      return now >= start && now < end;
+    });
+
+    // ⭐ 如果沒命中（例如資料全部未來）
+    if (!three) {
+      three = this.threeHourData[0];
     }
+
+    this.currentWeather = three.weather;
+    this.currentWeatherDesc = three.weatherDes;
+    this.currentWeathercode = three.weatherCode;
   }
 
   areaChange(change: string) {
@@ -88,6 +123,7 @@ export class ApidemoComponent {
     this.updateCurrentWeather();
     // console.log('teas',this.data)
   }
+  //時間格式化
   formatTime(dateStr: string) {
     const d = new Date(dateStr);
 
@@ -99,6 +135,7 @@ export class ApidemoComponent {
       '0',
     )}:00`;
   }
+  //整理API返還資料
   group(data: any) {
     let test = [];
     let threetest = [];
@@ -119,11 +156,11 @@ export class ApidemoComponent {
         weather: data.WeatherElement[8].Time[i].ElementValue[0].Weather,
         weatherDes:
           data.WeatherElement[9].Time[i].ElementValue[0].WeatherDescription,
-        weatherCode: data.WeatherElement[9].Time[i].ElementValue[0].WeatherCode,
+        weatherCode: data.WeatherElement[8].Time[i].ElementValue[0].WeatherCode,
       };
       threetest.push(item);
     }
-    // console.table(threetest);
+    console.table(threetest);
     this.oneHourData = test;
     this.threeHourData = threetest;
 
@@ -144,8 +181,6 @@ export class ApidemoComponent {
         this.area = result.Location.map((test: any) => test.LocationName);
         this.choseArea = this.area[0]; //預設第一個
         this.areaChange(this.choseArea); //直接顯示
-        this.updateCurrentWeather();
-        this.filterByDay(this.selectedDay);
         console.log(this.location);
 
         // console.log(this.oneHourData);
