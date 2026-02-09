@@ -9,11 +9,16 @@ import { ArrayyyComponent } from './@components/arrayyy/arrayyy.component';
 import { IfdemoComponent } from './@components/ifdemo/ifdemo.component';
 import { ApidemoComponent } from './@components/apidemo/apidemo.component';
 import { InterfaceDemoComponent } from './@components/interface-demo/interface-demo.component';
+import { DataSortDemoComponent } from './@components/data-sort-demo/data-sort-demo.component';
 
 export const routes: Routes = [
   {
     path: 'first',
     component: FirstComponent,
+  },
+  {
+    path: 'datasort',
+    component: DataSortDemoComponent,
   },
   {
     path: 'father',
