@@ -8,6 +8,7 @@ import { FatherComponent } from './@components/father/father.component';
 import { ArrayyyComponent } from './@components/arrayyy/arrayyy.component';
 import { IfdemoComponent } from './@components/ifdemo/ifdemo.component';
 import { ApidemoComponent } from './@components/apidemo/apidemo.component';
+import { InterfaceDemoComponent } from './@components/interface-demo/interface-demo.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
   {
     path: 'father',
     component: FatherComponent,
+  },
+  {
+    path: 'interface',
+    component: InterfaceDemoComponent,
   },
   {
     path: 'apidemo',
