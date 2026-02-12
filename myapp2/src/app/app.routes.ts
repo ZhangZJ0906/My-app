@@ -10,6 +10,7 @@ import { IfdemoComponent } from './@components/ifdemo/ifdemo.component';
 import { ApidemoComponent } from './@components/apidemo/apidemo.component';
 import { InterfaceDemoComponent } from './@components/interface-demo/interface-demo.component';
 import { DataSortDemoComponent } from './@components/data-sort-demo/data-sort-demo.component';
+import { ChartdemoComponent } from './@components/chartdemo/chartdemo.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,10 @@ export const routes: Routes = [
   {
     path: 'datasort',
     component: DataSortDemoComponent,
+  },
+    {
+    path: 'chart',
+    component: ChartdemoComponent,
   },
   {
     path: 'father',

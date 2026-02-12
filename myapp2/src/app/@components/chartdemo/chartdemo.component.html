@@ -1,0 +1,7 @@
+<p>chartdemo works!</p>
+
+@for (item of arr; track item.id) {
+  <div class=" w-25 h-25">
+    <canvas [id]="'chart-' + item.id"></canvas>
+  </div>
+}
